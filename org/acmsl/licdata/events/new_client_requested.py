@@ -44,7 +44,6 @@ class NewClientRequested(Event):
         phone: str,
         previousEventIds: List[str] = None,
         reconstructedId: str = None,
-        reconstructedPreviousEventIds: List[str] = None,
     ):
         """
         Creates a new NewClientRequested instance.
@@ -56,10 +55,12 @@ class NewClientRequested(Event):
         :type contact: str
         :param phone: The phone.
         :type phone: str
+        :param previousEventIds: The id of the previous events.
+        :type previousEventIds: List[str]
+        :param reconstructedId: The id of the event, if it's generated externally.
+        :type reconstructedId: str
         """
-        super().__init__(
-            previousEventIds, reconstructedId, reconstructedPreviousEventIds
-        )
+        super().__init__(previousEventIds, reconstructedId)
         self._email = email
         self._address = address
         self._contact = contact
