@@ -1,8 +1,8 @@
 # vim: set fileencoding=utf-8
 """
-org/acmsl/licdata/events/__init__.py
+org/acmsl/licdata/events/clients/__init__.py
 
-This file ensures org.acmsl.licdata.events is a namespace.
+This file ensures org.acmsl.licdata.events.clients is a namespace.
 
 Copyright (C) 2024-today acmsl's licdata-events
 
@@ -20,6 +20,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 __path__ = __import__("pkgutil").extend_path(__path__, __name__)
+
+from .base_client_event import BaseClientEvent
+from .invalid_new_client_request import InvalidNewClientRequest
+from .client_already_exists import ClientAlreadyExists
+from .new_client_created import NewClientCreated
+from .new_client_requested import NewClientRequested
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:

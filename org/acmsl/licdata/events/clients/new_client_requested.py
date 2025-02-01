@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/new_client_requested.py
+org/acmsl/licdata/events/clients/new_client_requested.py
 
 This file defines the NewClientRequested class.
 
@@ -19,11 +19,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.shared import Event
-from typing import List
+from .base_client_event import BaseClientEvent
+from typing import List, Optional
 
 
-class NewClientRequested(Event):
+class NewClientRequested(BaseClientEvent):
     """
     Represents events for creating new Client instances.
 
@@ -39,68 +39,40 @@ class NewClientRequested(Event):
     def __init__(
         self,
         email: str,
-        address: str,
-        contact: str,
-        phone: str,
-        previousEventIds: List[str] = None,
-        reconstructedId: str = None,
+        address: Optional[str],
+        contact: Optional[str],
+        phone: Optional[str],
+        previousEventIds: Optional[List[str]] = None,
+        reconstructedId: Optional[str] = None,
+        reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
         Creates a new NewClientRequested instance.
         :param email: The email.
         :type email: str
         :param address: The address.
-        :type address: str
+        :type address: Optional[str]
         :param contact: The contact information.
-        :type contact: str
+        :type contact: Optional[str]
         :param phone: The phone.
-        :type phone: str
+        :type phone: Optional[str]
         :param previousEventIds: The id of the previous events.
-        :type previousEventIds: List[str]
+        :type previousEventIds: Optional[List[str]]
         :param reconstructedId: The id of the event, if it's generated externally.
-        :type reconstructedId: str
+        :type reconstructedId: Optional[str]
+        :param reconstructedPreviousEventIds: The id of the events this one is response to,
+        in case it's a reconstruction of an external event.
+        :type reconstructedPreviousEventIds: Optional[List[str]]
         """
-        super().__init__(previousEventIds, reconstructedId)
-        self._email = email
-        self._address = address
-        self._contact = contact
-        self._phone = phone
-
-    @property
-    def email(self) -> str:
-        """
-        Retrieves the email.
-        :return: Such email.
-        :rtype: str
-        """
-        return self._email
-
-    @property
-    def address(self) -> str:
-        """
-        Retrieves the address.
-        :return: Such address.
-        :rtype: str
-        """
-        return self._address
-
-    @property
-    def contact(self) -> str:
-        """
-        Retrieves the contact.
-        :return: Such contact.
-        :rtype: str
-        """
-        return self._contact
-
-    @property
-    def phone(self) -> str:
-        """
-        Retrieves the phone.
-        :return: Such phone.
-        :rtype: str
-        """
-        return self._phone
+        super().__init__(
+            email,
+            address,
+            contact,
+            phone,
+            previousEventIds,
+            reconstructedId,
+            reconstructedPreviousEventIds,
+        )
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/new_client_created.py
+org/acmsl/licdata/events/clients/client_already_exists.py
 
-This file defines the NewClientCreated class.
+This file defines the ClientAlreadyExists class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -19,18 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.shared import Event
+from .base_client_event import BaseClientEvent
 from typing import List
 
 
-class NewClientCreated(Event):
+class ClientAlreadyExists(BaseClientEvent):
     """
-    Represents events for creating new Client instances.
+    A new client is requested, but the client already exists.
 
-    Class name: NewClientCreated
+    Class name: ClientAlreadyExists
 
     Responsibilities:
-        - Represent the event when a new Client has been created.
+        - Represent the event when a request for a new Client is rejected.
 
     Collaborators:
         - None
@@ -38,15 +38,19 @@ class NewClientCreated(Event):
 
     def __init__(
         self,
+        id: str,
         email: str,
         address: str,
         contact: str,
         phone: str,
         previousEventIds: List[str] = None,
         reconstructedId: str = None,
+        reconstructedPreviousEventIds: List[str] = None,
     ):
         """
-        Creates a new NewClientCreated instance.
+        Creates a new ClientAlreadyExists instance.
+        :param id: The id of the client.
+        :type id: str
         :param email: The email.
         :type email: str
         :param address: The address.
@@ -59,48 +63,29 @@ class NewClientCreated(Event):
         :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
         :type reconstructedId: str
+        :param reconstructedPreviousEventIds: The id of the events this one is response to,
+        in case it's a reconstruction of an external event.
+        :type reconstructedPreviousEventIds: str
         """
-        super().__init__(previousEventIds, reconstructedId)
-        self._email = email
-        self._address = address
-        self._contact = contact
-        self._phone = phone
+        self._id = id
+        super().__init__(
+            email,
+            address,
+            contact,
+            phone,
+            previousEventIds,
+            reconstructedId,
+            reconstructedPreviousEventIds,
+        )
 
     @property
-    def email(self) -> str:
+    def is_error(self):
         """
-        Retrieves the email.
-        :return: Such email.
-        :rtype: str
+        Checks if the event is an error.
+        :return: True if it's an error, False otherwise.
+        :rtype: bool
         """
-        return self._email
-
-    @property
-    def address(self) -> str:
-        """
-        Retrieves the address.
-        :return: Such address.
-        :rtype: str
-        """
-        return self._address
-
-    @property
-    def contact(self) -> str:
-        """
-        Retrieves the contact.
-        :return: Such contact.
-        :rtype: str
-        """
-        return self._contact
-
-    @property
-    def phone(self) -> str:
-        """
-        Retrieves the phone.
-        :return: Such phone.
-        :rtype: str
-        """
-        return self._phone
+        return True
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
