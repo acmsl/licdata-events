@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/invalid_new_client_request.py
+org/acmsl/licdata/events/clients/invalid_list_clients_request.py
 
-This file defines the InvalidNewClientRequest class.
+This file defines the InvalidListClientsRequest class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -23,14 +23,14 @@ from .base_client_event import BaseClientEvent
 from typing import List
 
 
-class InvalidNewClientRequest(BaseClientEvent):
+class InvalidListClientsRequest(BaseClientEvent):
     """
     Represents invalid requests for listing Client instances.
 
-    Class name: InvalidNewClientRequest
+    Class name: InvalidListClientsRequest
 
     Responsibilities:
-        - Represent the event when the request for creating a new Client is invalid.
+        - Represent the event when the request for listing Clients is invalid.
 
     Collaborators:
         - None
@@ -47,7 +47,7 @@ class InvalidNewClientRequest(BaseClientEvent):
         reconstructedPreviousEventIds: List[str] = None,
     ):
         """
-        Creates a new InvalidNewClientRequest instance.
+        Creates a new InvalidListClientsRequest instance.
         :param email: The email.
         :type email: str
         :param address: The address.

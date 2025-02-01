@@ -26,6 +26,10 @@ from .invalid_new_client_request import InvalidNewClientRequest
 from .client_already_exists import ClientAlreadyExists
 from .new_client_created import NewClientCreated
 from .new_client_requested import NewClientRequested
+from .list_clients_requested import ListClientsRequested
+from .matching_clients_found import MatchingClientsFound
+from .no_matching_clients_found import NoMatchingClientsFound
+from .invalid_list_clients_request import InvalidListClientsRequest
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:

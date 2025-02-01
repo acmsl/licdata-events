@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/invalid_new_client_request.py
+org/acmsl/licdata/events/clients/list_clients_requested.py
 
-This file defines the InvalidNewClientRequest class.
+This file defines the ListClientsRequested class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -20,17 +20,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from .base_client_event import BaseClientEvent
-from typing import List
+from typing import List, Optional
 
 
-class InvalidNewClientRequest(BaseClientEvent):
+class ListClientsRequested(BaseClientEvent):
     """
-    Represents invalid requests for listing Client instances.
+    Represents events for creating new Client instances.
 
-    Class name: InvalidNewClientRequest
+    Class name: ListClientsRequested
 
     Responsibilities:
-        - Represent the event when the request for creating a new Client is invalid.
+        - Represent the event when a new Client is requested.
 
     Collaborators:
         - None
@@ -38,31 +38,31 @@ class InvalidNewClientRequest(BaseClientEvent):
 
     def __init__(
         self,
-        email: str,
-        address: str,
-        contact: str,
-        phone: str,
-        previousEventIds: List[str] = None,
-        reconstructedId: str = None,
-        reconstructedPreviousEventIds: List[str] = None,
+        email: Optional[str],
+        address: Optional[str],
+        contact: Optional[str],
+        phone: Optional[str],
+        previousEventIds: Optional[List[str]] = None,
+        reconstructedId: Optional[str] = None,
+        reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
-        Creates a new InvalidNewClientRequest instance.
+        Creates a new ListClientsRequested instance.
         :param email: The email.
         :type email: str
         :param address: The address.
-        :type address: str
+        :type address: Optional[str]
         :param contact: The contact information.
-        :type contact: str
+        :type contact: Optional[str]
         :param phone: The phone.
-        :type phone: str
+        :type phone: Optional[str]
         :param previousEventIds: The id of the previous events.
-        :type previousEventIds: List[str]
+        :type previousEventIds: Optional[List[str]]
         :param reconstructedId: The id of the event, if it's generated externally.
-        :type reconstructedId: str
+        :type reconstructedId: Optional[str]
         :param reconstructedPreviousEventIds: The id of the events this one is response to,
         in case it's a reconstruction of an external event.
-        :type reconstructedPreviousEventIds: str
+        :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
             email,
@@ -73,15 +73,6 @@ class InvalidNewClientRequest(BaseClientEvent):
             reconstructedId,
             reconstructedPreviousEventIds,
         )
-
-    @property
-    def is_error(self):
-        """
-        Checks if the event is an error.
-        :return: True if it's an error, False otherwise.
-        :rtype: bool
-        """
-        return True
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
