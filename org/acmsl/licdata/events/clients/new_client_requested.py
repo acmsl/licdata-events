@@ -65,14 +65,23 @@ class NewClientRequested(BaseClientEvent):
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
-            email,
-            address,
-            contact,
-            phone,
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            email=email,
+            address=address,
+            contact=contact,
+            phone=phone,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
+
+    @classmethod
+    def empty(cls):
+        """
+        Builds an empty instance. Required for unmarshalling.
+        :return: An empty instance.
+        :rtype: pythoneda.ValueObject
+        """
+        return cls(email="", address="", contact="", phone="")
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et

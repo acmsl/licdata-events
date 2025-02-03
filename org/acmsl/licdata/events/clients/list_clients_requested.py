@@ -65,13 +65,13 @@ class ListClientsRequested(BaseClientEvent):
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
-            email,
-            address,
-            contact,
-            phone,
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            email=email,
+            address=address,
+            contact=contact,
+            phone=phone,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
 

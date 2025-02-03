@@ -67,15 +67,15 @@ class ClientAlreadyExists(BaseClientEvent):
         in case it's a reconstruction of an external event.
         :type reconstructedPreviousEventIds: str
         """
-        self._id = id
         super().__init__(
-            email,
-            address,
-            contact,
-            phone,
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            id=id,
+            email=email,
+            address=address,
+            contact=contact,
+            phone=phone,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
     @property

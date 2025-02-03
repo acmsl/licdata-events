@@ -61,10 +61,19 @@ class MatchingClientsFound(Event):
         self._matching_clients = matchingClients
         self._criteria = criteria
         super().__init__(
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
+
+    @classmethod
+    def empty(cls):
+        """
+        Builds an empty instance. Required for unmarshalling.
+        :return: An empty instance.
+        :rtype: pythoneda.ValueObject
+        """
+        return cls(matchingClients=[], criteria={})
 
     @property
     @primary_key_attribute

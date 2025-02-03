@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import abc
-from pythoneda.shared import attribute, Event, primary_key_attribute
+from pythoneda.shared import attribute, Event
 from typing import List, Optional
 
 
@@ -39,7 +39,8 @@ class BaseClientEvent(Event, abc.ABC):
 
     def __init__(
         self,
-        email: str,
+        id: Optional[str] = None,
+        email: Optional[str] = None,
         address: Optional[str] = None,
         contact: Optional[str] = None,
         phone: Optional[str] = None,
@@ -49,8 +50,10 @@ class BaseClientEvent(Event, abc.ABC):
     ):
         """
         Creates a new BaseClientEvent instance.
+        :param id: The id of the client.
+        :type id: Optional[str]
         :param email: The email.
-        :type email: str
+        :type email: Optional[str]
         :param address: The address.
         :type address: Optional[str]
         :param contact: The contact information.
@@ -65,6 +68,7 @@ class BaseClientEvent(Event, abc.ABC):
         in case it's a reconstruction of an external event.
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
+        self._id = id
         self._email = email
         self._address = address
         self._contact = contact
@@ -74,7 +78,17 @@ class BaseClientEvent(Event, abc.ABC):
         )
 
     @property
-    @primary_key_attribute
+    @attribute
+    def email(self) -> str:
+        """
+        Retrieves the email.
+        :return: Such email.
+        :rtype: str
+        """
+        return self._email
+
+    @property
+    @attribute
     def email(self) -> str:
         """
         Retrieves the email.

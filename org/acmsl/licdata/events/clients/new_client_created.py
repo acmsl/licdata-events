@@ -38,6 +38,7 @@ class NewClientCreated(BaseClientEvent):
 
     def __init__(
         self,
+        id: str,
         email: str,
         address: str,
         contact: str,
@@ -48,6 +49,8 @@ class NewClientCreated(BaseClientEvent):
     ):
         """
         Creates a new NewClientCreated instance.
+        :param id: The id of the client.
+        :type id: str
         :param email: The email.
         :type email: str
         :param address: The address.
@@ -65,13 +68,14 @@ class NewClientCreated(BaseClientEvent):
         :type reconstructedPreviousEventIds: str
         """
         super().__init__(
-            email,
-            address,
-            contact,
-            phone,
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            id=id,
+            email=email,
+            address=address,
+            contact=contact,
+            phone=phone,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
 

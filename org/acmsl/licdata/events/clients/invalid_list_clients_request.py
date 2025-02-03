@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from .base_client_event import BaseClientEvent
-from typing import List
+from typing import List, Optional
 
 
 class InvalidListClientsRequest(BaseClientEvent):
@@ -38,31 +38,31 @@ class InvalidListClientsRequest(BaseClientEvent):
 
     def __init__(
         self,
-        email: str,
-        address: str,
-        contact: str,
-        phone: str,
+        email: Optional[str] = None,
+        address: Optional[str] = None,
+        contact: Optional[str] = None,
+        phone: Optional[str] = None,
         previousEventIds: List[str] = None,
-        reconstructedId: str = None,
-        reconstructedPreviousEventIds: List[str] = None,
+        reconstructedId: Optional[str] = None,
+        reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
         Creates a new InvalidListClientsRequest instance.
         :param email: The email.
-        :type email: str
+        :type email: Optional[str]
         :param address: The address.
-        :type address: str
+        :type address: Optional[str]
         :param contact: The contact information.
-        :type contact: str
+        :type contact: Optional[str]
         :param phone: The phone.
-        :type phone: str
+        :type phone: Optional[str]
         :param previousEventIds: The id of the previous events.
         :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
-        :type reconstructedId: str
+        :type reconstructedId: Optional[str]
         :param reconstructedPreviousEventIds: The id of the events this one is response to,
         in case it's a reconstruction of an external event.
-        :type reconstructedPreviousEventIds: str
+        :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
             email,

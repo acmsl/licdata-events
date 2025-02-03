@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/invalid_new_client_request.py
+org/acmsl/licdata/events/clients/invalid_delete_client_request.py
 
-This file defines the InvalidNewClientRequest class.
+This file defines the InvalidDeleteClientRequest class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -20,17 +20,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from .base_client_event import BaseClientEvent
-from typing import List
+from typing import List, Optional
 
 
-class InvalidNewClientRequest(BaseClientEvent):
+class InvalidDeleteClientRequest(BaseClientEvent):
     """
-    Represents invalid requests for listing Client instances.
+    Represents invalid requests for deleting Client instances.
 
-    Class name: InvalidNewClientRequest
+    Class name: InvalidDeleteClientRequest
 
     Responsibilities:
-        - Represent the event when the request for creating a new Client is invalid.
+        - Represent the event when the request for deleting a client is invalid.
 
     Collaborators:
         - None
@@ -38,37 +38,25 @@ class InvalidNewClientRequest(BaseClientEvent):
 
     def __init__(
         self,
-        email: str,
-        address: str,
-        contact: str,
-        phone: str,
+        id: str,
         previousEventIds: List[str] = None,
-        reconstructedId: str = None,
-        reconstructedPreviousEventIds: List[str] = None,
+        reconstructedId: Optional[str] = None,
+        reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
-        Creates a new InvalidNewClientRequest instance.
-        :param email: The email.
-        :type email: str
-        :param address: The address.
-        :type address: str
-        :param contact: The contact information.
-        :type contact: str
-        :param phone: The phone.
-        :type phone: str
+        Creates a new InvalidDeleteClientRequest instance.
+        :param id: The client id.
+        :type id: str
         :param previousEventIds: The id of the previous events.
         :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
-        :type reconstructedId: str
+        :type reconstructedId: Optional[str]
         :param reconstructedPreviousEventIds: The id of the events this one is response to,
         in case it's a reconstruction of an external event.
-        :type reconstructedPreviousEventIds: str
+        :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
-            email=email,
-            address=address,
-            contact=contact,
-            phone=phone,
+            id=id,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,

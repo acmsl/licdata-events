@@ -59,9 +59,9 @@ class NoMatchingClientsFound(Event):
         """
         self._criteria = criteria
         super().__init__(
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
     @property
