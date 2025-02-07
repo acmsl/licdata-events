@@ -27,12 +27,15 @@ from .client_already_exists import ClientAlreadyExists
 from .new_client_created import NewClientCreated
 from .new_client_requested import NewClientRequested
 from .list_clients_requested import ListClientsRequested
+from .matching_client_found import MatchingClientFound
 from .matching_clients_found import MatchingClientsFound
 from .no_matching_clients_found import NoMatchingClientsFound
 from .invalid_list_clients_request import InvalidListClientsRequest
 from .delete_client_requested import DeleteClientRequested
 from .client_deleted import ClientDeleted
 from .invalid_delete_client_request import InvalidDeleteClientRequest
+from .find_client_by_id_requested import FindClientByIdRequested
+from .invalid_find_client_by_id_request import InvalidFindClientByIdRequest
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:

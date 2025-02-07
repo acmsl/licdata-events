@@ -39,7 +39,7 @@ class BaseClientEvent(Event, abc.ABC):
 
     def __init__(
         self,
-        id: Optional[str] = None,
+        entityId: Optional[str] = None,
         email: Optional[str] = None,
         address: Optional[str] = None,
         contact: Optional[str] = None,
@@ -50,8 +50,8 @@ class BaseClientEvent(Event, abc.ABC):
     ):
         """
         Creates a new BaseClientEvent instance.
-        :param id: The id of the client.
-        :type id: Optional[str]
+        :param entityId: The id of the client.
+        :type entityId: Optional[str]
         :param email: The email.
         :type email: Optional[str]
         :param address: The address.
@@ -68,7 +68,7 @@ class BaseClientEvent(Event, abc.ABC):
         in case it's a reconstruction of an external event.
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
-        self._id = id
+        self._entity_id = entityId
         self._email = email
         self._address = address
         self._contact = contact
@@ -79,7 +79,17 @@ class BaseClientEvent(Event, abc.ABC):
 
     @property
     @attribute
-    def email(self) -> str:
+    def entity_id(self) -> Optional[str]:
+        """
+        Retrieves the entity id.
+        :return: Such id.
+        :rtype: str
+        """
+        return self._entity_id
+
+    @property
+    @attribute
+    def email(self) -> Optional[str]:
         """
         Retrieves the email.
         :return: Such email.
@@ -89,17 +99,7 @@ class BaseClientEvent(Event, abc.ABC):
 
     @property
     @attribute
-    def email(self) -> str:
-        """
-        Retrieves the email.
-        :return: Such email.
-        :rtype: str
-        """
-        return self._email
-
-    @property
-    @attribute
-    def address(self) -> str:
+    def address(self) -> Optional[str]:
         """
         Retrieves the address.
         :return: Such address.
@@ -109,7 +109,7 @@ class BaseClientEvent(Event, abc.ABC):
 
     @property
     @attribute
-    def contact(self) -> str:
+    def contact(self) -> Optional[str]:
         """
         Retrieves the contact.
         :return: Such contact.
@@ -119,7 +119,7 @@ class BaseClientEvent(Event, abc.ABC):
 
     @property
     @attribute
-    def phone(self) -> str:
+    def phone(self) -> Optional[str]:
         """
         Retrieves the phone.
         :return: Such phone.

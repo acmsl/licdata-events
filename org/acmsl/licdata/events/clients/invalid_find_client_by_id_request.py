@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/delete_client_requested.py
+org/acmsl/licdata/events/clients/invalid_find_client_by_id_request.py
 
-This file defines the DeleteClientRequested class.
+This file defines the InvalidFindClientByIdRequest class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -19,18 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.shared import Event, primary_key_attribute
+from .base_client_event import BaseClientEvent
 from typing import List, Optional
 
 
-class DeleteClientRequested(Event):
+class InvalidFindClientByIdRequest(BaseClientEvent):
     """
-    Represents events for creating new Client instances.
+    Represents invalid requests for finding clients by id.
 
-    Class name: DeleteClientRequested
+    Class name: InvalidFindClientByIdRequest
 
     Responsibilities:
-        - Represent the event when a new Client is requested.
+        - Represent the event when the request for finding a client by id is invalid.
 
     Collaborators:
         - None
@@ -38,32 +38,38 @@ class DeleteClientRequested(Event):
 
     def __init__(
         self,
-        entityId: str,
-        previousEventIds: Optional[List[str]] = None,
+        id: str,
+        previousEventIds: List[str] = None,
         reconstructedId: Optional[str] = None,
         reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
-        Creates a new DeleteClientRequested instance.
-        :param email: The email of the client.
-        :type email: str
+        Creates a new InvalidFindClientByIdRequest instance.
+        :param id: The client id.
+        :type id: str
+        :param previousEventIds: The id of the previous events.
+        :type previousEventIds: List[str]
+        :param reconstructedId: The id of the event, if it's generated externally.
+        :type reconstructedId: Optional[str]
+        :param reconstructedPreviousEventIds: The id of the events this one is response to,
+        in case it's a reconstruction of an external event.
+        :type reconstructedPreviousEventIds: Optional[List[str]]
         """
-        self._entity_id = entityId
         super().__init__(
+            id=id,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
     @property
-    @primary_key_attribute
-    def entity_id(self) -> str:
+    def is_error(self):
         """
-        Retrievves the id of the entity.
-        :return: Such value.
-        :rtype: str
+        Checks if the event is an error.
+        :return: True if it's an error, False otherwise.
+        :rtype: bool
         """
-        return self._entity_id
+        return True
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et

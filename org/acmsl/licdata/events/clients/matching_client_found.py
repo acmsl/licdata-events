@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/new_client_requested.py
+org/acmsl/licdata/events/clients/matching_client_found.py
 
-This file defines the NewClientRequested class.
+This file defines the MatchingClientFound class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -19,18 +19,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from .base_client_event import BaseClientEvent
-from typing import List, Optional
+from pythoneda.shared import Event, primary_key_attribute
+from typing import Dict, List
 
 
-class NewClientRequested(BaseClientEvent):
+class MatchingClientFound(Event):
     """
-    Represents events for creating new Client instances.
+    Represents events when a matching client is found.
 
-    Class name: NewClientRequested
+    Class name: MatchingClientFound
 
     Responsibilities:
-        - Represent the event when a new Client is requested.
+        - Represent the event when a matching Client is found.
 
     Collaborators:
         - None
@@ -38,37 +38,25 @@ class NewClientRequested(BaseClientEvent):
 
     def __init__(
         self,
-        email: str,
-        address: Optional[str] = None,
-        contact: Optional[str] = None,
-        phone: Optional[str] = None,
-        previousEventIds: Optional[List[str]] = None,
-        reconstructedId: Optional[str] = None,
-        reconstructedPreviousEventIds: Optional[List[str]] = None,
+        matchingClient: "Client",
+        previousEventIds: List[str] = None,
+        reconstructedId: str = None,
+        reconstructedPreviousEventIds: List[str] = None,
     ):
         """
-        Creates a new NewClientRequested instance.
-        :param email: The email.
-        :type email: str
-        :param address: The address.
-        :type address: Optional[str]
-        :param contact: The contact information.
-        :type contact: Optional[str]
-        :param phone: The phone.
-        :type phone: Optional[str]
+        Creates a new MatchingClientFound instance.
+        :param matchingClient: The matching client.
+        :type matchingClient: org.acmsl.licdata.Client
         :param previousEventIds: The id of the previous events.
-        :type previousEventIds: Optional[List[str]]
+        :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
-        :type reconstructedId: Optional[str]
+        :type reconstructedId: str
         :param reconstructedPreviousEventIds: The id of the events this one is response to,
         in case it's a reconstruction of an external event.
-        :type reconstructedPreviousEventIds: Optional[List[str]]
+        :type reconstructedPreviousEventIds: str
         """
+        self._matching_client = matchingClient
         super().__init__(
-            email=email,
-            address=address,
-            contact=contact,
-            phone=phone,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,
@@ -81,7 +69,17 @@ class NewClientRequested(BaseClientEvent):
         :return: An empty instance.
         :rtype: pythoneda.ValueObject
         """
-        return cls(email="", address="", contact="", phone="")
+        return cls(matchingClient=None)
+
+    @property
+    @primary_key_attribute
+    def matching_client(self) -> "Client":
+        """
+        Retrieves the matching client.
+        :return: Such information.
+        :rtype: org.acmsl.licdata.Client
+        """
+        return self._matching_client
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et

@@ -20,6 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from .base_client_event import BaseClientEvent
+from pythoneda.shared import primary_key_attribute
 from typing import List
 
 
@@ -38,7 +39,7 @@ class NewClientCreated(BaseClientEvent):
 
     def __init__(
         self,
-        id: str,
+        entityId: str,
         email: str,
         address: str,
         contact: str,
@@ -49,8 +50,8 @@ class NewClientCreated(BaseClientEvent):
     ):
         """
         Creates a new NewClientCreated instance.
-        :param id: The id of the client.
-        :type id: str
+        :param entityId: The id of the client.
+        :type entityId: str
         :param email: The email.
         :type email: str
         :param address: The address.
@@ -68,7 +69,7 @@ class NewClientCreated(BaseClientEvent):
         :type reconstructedPreviousEventIds: str
         """
         super().__init__(
-            id=id,
+            entityId=entityId,
             email=email,
             address=address,
             contact=contact,

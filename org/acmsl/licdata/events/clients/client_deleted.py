@@ -38,7 +38,7 @@ class ClientDeleted(BaseClientEvent):
 
     def __init__(
         self,
-        id: str,
+        entityId: str,
         email: str,
         address: Optional[str],
         contact: Optional[str],
@@ -49,8 +49,8 @@ class ClientDeleted(BaseClientEvent):
     ):
         """
         Creates a new ClientDeleted instance.
-        :param id: The id of the client.
-        :type id: str
+        :param entityId: The id of the client.
+        :type entityId: str
         :param email: The email.
         :type email: str
         :param address: The address.
@@ -68,7 +68,7 @@ class ClientDeleted(BaseClientEvent):
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
-            id=id,
+            entityId=entityId,
             email=email,
             address=address,
             contact=contact,

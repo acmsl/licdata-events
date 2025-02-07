@@ -38,15 +38,15 @@ class InvalidDeleteClientRequest(BaseClientEvent):
 
     def __init__(
         self,
-        id: str,
+        clientId: str,
         previousEventIds: List[str] = None,
         reconstructedId: Optional[str] = None,
         reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
         Creates a new InvalidDeleteClientRequest instance.
-        :param id: The client id.
-        :type id: str
+        :param clientId: The client id.
+        :type clientId: str
         :param previousEventIds: The id of the previous events.
         :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
@@ -56,7 +56,7 @@ class InvalidDeleteClientRequest(BaseClientEvent):
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
         super().__init__(
-            id=id,
+            entityId=entityId,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,
