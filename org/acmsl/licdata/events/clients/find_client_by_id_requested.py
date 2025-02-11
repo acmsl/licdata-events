@@ -50,9 +50,9 @@ class FindClientByIdRequested(Event):
         """
         self._entity_id = entityId
         super().__init__(
-            previousEventIds,
-            reconstructedId,
-            reconstructedPreviousEventIds,
+            previousEventIds=previousEventIds,
+            reconstructedId=reconstructedId,
+            reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
 
     @property

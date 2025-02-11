@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-org/acmsl/licdata/events/clients/delete_client_requested.py
+org/acmsl/licdata/events/clients/update_client_requested.py
 
-This file defines the DeleteClientRequested class.
+This file defines the UpdateClientRequested class.
 
 Copyright (C) 2024-today ACM S.L. Licdata-Events
 
@@ -19,18 +19,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.shared import Event, primary_key_attribute
+from .base_client_event import BaseClientEvent
+from pythoneda.shared import primary_key_attribute
 from typing import List, Optional
 
 
-class DeleteClientRequested(Event):
+class UpdateClientRequested(BaseClientEvent):
     """
-    Represents events for deleting a Client instances.
+    Represents events for updating a client.
 
-    Class name: DeleteClientRequested
+    Class name: UpdateClientRequested
 
     Responsibilities:
-        - Represent the event when deleting a Client is requested.
+        - Represent the event when updating a Client is requested.
 
     Collaborators:
         - None
@@ -39,14 +40,23 @@ class DeleteClientRequested(Event):
     def __init__(
         self,
         entityId: str,
+        address: Optional[str] = None,
+        contact: Optional[str] = None,
+        phone: Optional[str] = None,
         previousEventIds: Optional[List[str]] = None,
         reconstructedId: Optional[str] = None,
         reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
-        Creates a new DeleteClientRequested instance.
+        Creates a new UpdateClientRequested instance.
         :param entityId: The id of the client.
         :type entityId: str
+        :param address: The address.
+        :type address: Optional[str]
+        :param contact: The contact.
+        :type contact: Optional[str]
+        :param phone: The phone.
+        :type phone: Optional[str]
         :param previousEventIds: The id of the previous events.
         :type previousEventIds: List[str]
         :param reconstructedId: The id of the event, if it's generated externally.
@@ -55,22 +65,15 @@ class DeleteClientRequested(Event):
         in case it's a reconstruction of an external event.
         :type reconstructedPreviousEventIds: str
         """
-        self._entity_id = entityId
         super().__init__(
+            entityId=entityId,
+            address=address,
+            contact=contact,
+            phone=phone,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
-
-    @property
-    @primary_key_attribute
-    def entity_id(self) -> str:
-        """
-        Retrievves the id of the entity.
-        :return: Such value.
-        :rtype: str
-        """
-        return self._entity_id
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et

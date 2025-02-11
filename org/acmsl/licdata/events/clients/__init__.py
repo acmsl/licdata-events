@@ -36,6 +36,9 @@ from .client_deleted import ClientDeleted
 from .invalid_delete_client_request import InvalidDeleteClientRequest
 from .find_client_by_id_requested import FindClientByIdRequested
 from .invalid_find_client_by_id_request import InvalidFindClientByIdRequest
+from .update_client_requested import UpdateClientRequested
+from .invalid_update_client_request import InvalidUpdateClientRequest
+from .client_updated import ClientUpdated
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:

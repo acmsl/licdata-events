@@ -19,11 +19,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from .base_client_event import BaseClientEvent
+from pythoneda.shared import attribute, Event
 from typing import List, Optional
 
 
-class ListClientsRequested(BaseClientEvent):
+class ListClientsRequested(Event):
     """
     Represents events for creating new Client instances.
 
@@ -38,24 +38,18 @@ class ListClientsRequested(BaseClientEvent):
 
     def __init__(
         self,
-        email: Optional[str],
-        address: Optional[str],
-        contact: Optional[str],
-        phone: Optional[str],
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 10,
         previousEventIds: Optional[List[str]] = None,
         reconstructedId: Optional[str] = None,
         reconstructedPreviousEventIds: Optional[List[str]] = None,
     ):
         """
         Creates a new ListClientsRequested instance.
-        :param email: The email.
-        :type email: str
-        :param address: The address.
-        :type address: Optional[str]
-        :param contact: The contact information.
-        :type contact: Optional[str]
-        :param phone: The phone.
-        :type phone: Optional[str]
+        :param offset: The offset.
+        :type offset: Optional[int]
+        :param limit: The maximum number of items to retrieve.
+        :type limit: Optional[int]
         :param previousEventIds: The id of the previous events.
         :type previousEventIds: Optional[List[str]]
         :param reconstructedId: The id of the event, if it's generated externally.
@@ -64,15 +58,33 @@ class ListClientsRequested(BaseClientEvent):
         in case it's a reconstruction of an external event.
         :type reconstructedPreviousEventIds: Optional[List[str]]
         """
+        self._offset = offset
+        self._limit = limit
         super().__init__(
-            email=email,
-            address=address,
-            contact=contact,
-            phone=phone,
             previousEventIds=previousEventIds,
             reconstructedId=reconstructedId,
             reconstructedPreviousEventIds=reconstructedPreviousEventIds,
         )
+
+    @property
+    @attribute
+    def offset(self) -> Optional[int]:
+        """
+        Retrieves the offset.
+        :return: Such value.
+        :rtype: Optional[int]
+        """
+        return self._offset
+
+    @property
+    @attribute
+    def limit(self) -> Optional[int]:
+        """
+        Retrieves the maximum number of items to retrieve.
+        :return: Such value.
+        :rtype: Optional[int]
+        """
+        return self._limit
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
